@@ -1,4 +1,4 @@
-module github.com/balena/go-libp2p-vsock
+module github.com/balena/go-multiaddr-vsock
 
 go 1.19
 

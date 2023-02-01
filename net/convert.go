@@ -1,4 +1,4 @@
-package libp2pvsock
+package mavsnet
 
 import (
 	"encoding/binary"

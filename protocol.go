@@ -1,4 +1,4 @@
-package libp2pvsock
+package mavs
 
 import (
 	ma "github.com/multiformats/go-multiaddr"

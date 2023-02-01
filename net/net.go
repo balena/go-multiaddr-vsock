@@ -1,4 +1,4 @@
-package libp2pvsock
+package mavsnet
 
 import (
 	"github.com/mdlayher/vsock"

@@ -1,4 +1,4 @@
-package libp2pvsock
+package mavsnet
 
 import (
 	manet "github.com/multiformats/go-multiaddr/net"
