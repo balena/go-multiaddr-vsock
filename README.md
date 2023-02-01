@@ -1,23 +1,54 @@
-# go-libp2p-vsock
+# go-multiaddr-vsock
 
-> go-libp2p's VSOCK transport
+> [multiaddr](https://github.com/multiformats/multiaddr) support for VSOCK
 
-Package `go-libp2p-vsock` is a libp2p transport. It uses `virtio-vsock` as communication channel to allow Nitro Enclaves to join private libp2p networks.
+Adds support to `multiaddr` addresses such as `/vsock/3/tcp/55555` to allow `virtio-vsock` as communication channel.
 
 ## Install
 
-`go-libp2p-vsock` is a standard Go module which can be installed with:
-
 ```sh
-go get github.com/balena/go-libp2p-vsock
+go get github.com/balena/go-multiaddr-vsock
+```
+
+## Usage
+
+### Example
+
+#### Simple
+
+```go
+import ma "github.com/balena/go-multiaddr-vsock"
+
+// construct from a string (err signals parse failure)
+m1, err := ma.NewMultiaddr("/vsock/3/tcp/1234")
+
+// construct from bytes (err signals parse failure)
+m2, err := ma.NewMultiaddrBytes(m1.Bytes())
+
+// true
+strings.Equal(m1.String(), "/vsock/3/tcp/1234")
+strings.Equal(m1.String(), m2.String())
+bytes.Equal(m1.Bytes(), m2.Bytes())
+m1.Equal(m2)
+m2.Equal(m1)
+```
+
+#### Protocols
+
+```go
+// get the multiaddr protocol description objects
+m1.Protocols()
+// []Protocol{
+//   Protocol{ Code: 40, Name: 'vsock'},
+// }
 ```
 
 ## Contribute
 
-Feel free to join in. All welcome. Open an [issue](https://github.com/balena/go-libp2p-vsock/issues)!
+Check out our [contributing document](https://github.com/multiformats/multiformats/blob/master/contributing.md) for more information on how we work, and about contributing in general. Please be aware that all interactions related to multiformats are subject to the IPFS [Code of Conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md).
 
-This repository falls under the libp2p [Code of Conduct](https://github.com/libp2p/community/blob/master/code-of-conduct.md).
+Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification.
 
 ## License
 
-MIT
+[MIT](LICENSE) © 2023 Guilherme Versiani
