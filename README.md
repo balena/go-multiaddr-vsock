@@ -17,7 +17,10 @@ go get github.com/balena/go-multiaddr-vsock
 #### Simple
 
 ```go
-import ma "github.com/balena/go-multiaddr-vsock"
+import (
+  _ "github.com/balena/go-multiaddr-vsock"
+  ma "github.com/multiformats/go-multiaddr"
+)
 
 // construct from a string (err signals parse failure)
 m1, err := ma.NewMultiaddr("/vsock/3/tcp/1234")
