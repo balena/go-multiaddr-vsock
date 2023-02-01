@@ -20,6 +20,9 @@ func vsockBtS(b []byte) (string, error) {
 }
 
 func vsockStB(s string) ([]byte, error) {
+	if s == "" {
+		return nil, fmt.Errorf("failed to parse vsock cid: %s", "cannot be empty")
+	}
 	b := make([]byte, 4)
 	if s == "x" {
 		binary.BigEndian.PutUint32(b, 0)
