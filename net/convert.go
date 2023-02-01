@@ -55,7 +55,7 @@ func DialArgs(m ma.Multiaddr) (contextID, port uint32, err error) {
 				err = fmt.Errorf("%s has unsupported tx", m)
 				return false
 			}
-			port = binary.BigEndian.Uint32(c.Bytes())
+			port = uint32(binary.BigEndian.Uint16(c.Bytes()))
 		}
 		// Done.
 		return false
