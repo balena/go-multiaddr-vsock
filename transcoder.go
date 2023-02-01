@@ -11,12 +11,17 @@ import (
 var TranscoderVsock = ma.NewTranscoderFromFunctions(vsockStB, vsockBtS, nil)
 
 func vsockBtS(b []byte) (string, error) {
-	return string(b), nil
+	contextID := binary.BigEndian.Uint32(b)
+	if contextID == 0 {
+		return "x", nil
+	} else {
+		return fmt.Sprintf("%d", contextID), nil
+	}
 }
 
 func vsockStB(s string) ([]byte, error) {
 	b := make([]byte, 4)
-	if s == "" {
+	if s == "x" {
 		binary.BigEndian.PutUint32(b, 0)
 	} else {
 		i, err := strconv.Atoi(s)
