@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 
+	mavs "github.com/balena/go-multiaddr-vsock"
 	"github.com/mdlayher/vsock"
 	ma "github.com/multiformats/go-multiaddr"
 )
@@ -41,7 +42,7 @@ func DialArgs(m ma.Multiaddr) (contextID, port uint32, err error) {
 		switch network {
 		case "":
 			switch c.Protocol().Code {
-			case P_VSOCK:
+			case mavs.P_VSOCK:
 				network = "vsock"
 				contextID = binary.BigEndian.Uint32(c.Bytes())
 				return true
