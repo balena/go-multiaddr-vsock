@@ -3,7 +3,7 @@ module github.com/balena/go-multiaddr-vsock
 go 1.19
 
 require (
-	github.com/balena/go-vsock v0.0.0-20230202011014-abad569eb7f9
+	github.com/balena/go-vsock v0.0.0-20230202011352-197b80630bd3
 	github.com/multiformats/go-multiaddr v0.8.0
 )
 
