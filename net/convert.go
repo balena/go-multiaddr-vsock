@@ -44,7 +44,7 @@ func DialArgs(m ma.Multiaddr) (contextID, port uint32, err error) {
 			switch c.Protocol().Code {
 			case mavs.P_VSOCK:
 				network = "vsock"
-				contextID = binary.BigEndian.Uint32(c.Bytes())
+				contextID = binary.BigEndian.Uint32(c.RawValue())
 				return true
 			}
 		case "vsock":
@@ -55,7 +55,7 @@ func DialArgs(m ma.Multiaddr) (contextID, port uint32, err error) {
 				err = fmt.Errorf("%s has unsupported tx", m)
 				return false
 			}
-			port = uint32(binary.BigEndian.Uint16(c.Bytes()))
+			port = uint32(binary.BigEndian.Uint16(c.RawValue()))
 		}
 		// Done.
 		return false
