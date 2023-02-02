@@ -1,7 +1,9 @@
 package mavsnet
 
 import (
-	"github.com/mdlayher/vsock"
+	"context"
+
+	"github.com/balena/go-vsock"
 	ma "github.com/multiformats/go-multiaddr"
 	manet "github.com/multiformats/go-multiaddr/net"
 )
@@ -9,12 +11,17 @@ import (
 // Dial connects to a remote address. It uses an underlying vsock.Conn,
 // then wraps it in a manet.Conn object (with local and remote Multiaddrs).
 func Dial(remote ma.Multiaddr) (manet.Conn, error) {
+	return DialContext(context.Background(), remote)
+}
+
+// DialContext allows to provide a custom context to Dial().
+func DialContext(ctx context.Context, remote ma.Multiaddr) (manet.Conn, error) {
 	contextID, port, err := DialArgs(remote)
 	if err != nil {
 		return nil, err
 	}
 
-	vs, err := vsock.Dial(contextID, port, nil)
+	vs, err := vsock.DialContext(ctx, contextID, port, nil)
 	if err != nil {
 		return nil, err
 	}

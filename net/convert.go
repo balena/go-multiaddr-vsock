@@ -6,7 +6,7 @@ import (
 	"net"
 
 	mavs "github.com/balena/go-multiaddr-vsock"
-	"github.com/mdlayher/vsock"
+	"github.com/balena/go-vsock"
 	ma "github.com/multiformats/go-multiaddr"
 )
 
