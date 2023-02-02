@@ -18,7 +18,7 @@ func parseVsockNetAddr(a net.Addr) (ma.Multiaddr, error) {
 		return nil, errIncorrectNetAddr
 	}
 
-	return ma.NewMultiaddr(fmt.Sprintf("/vsock/%d/tcp/%d", ac.ContextID, ac.Port))
+	return ma.NewMultiaddr(fmt.Sprintf("/vsock/%d/xtcp/%d", ac.ContextID, ac.Port))
 }
 
 func parseVsockNetMaddr(maddr ma.Multiaddr) (net.Addr, error) {
@@ -49,13 +49,13 @@ func DialArgs(m ma.Multiaddr) (contextID, port uint32, err error) {
 			}
 		case "vsock":
 			switch c.Protocol().Code {
-			case ma.P_TCP:
-				network = "tcp"
+			case mavs.P_XTCP:
+				network = "xtcp"
 			default:
 				err = fmt.Errorf("%s has unsupported tx", m)
 				return false
 			}
-			port = uint32(binary.BigEndian.Uint16(c.RawValue()))
+			port = binary.BigEndian.Uint32(c.RawValue())
 		}
 		// Done.
 		return false

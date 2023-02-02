@@ -13,10 +13,10 @@ func TestDialArgs(t *testing.T) {
 		err             error
 	}{
 		{
-			"/vsock/3/tcp/55555", 3, 55555, nil,
+			"/vsock/3/xtcp/55555", 3, 55555, nil,
 		},
 		{
-			"/vsock/x/tcp/55555", 0, 55555, nil,
+			"/vsock/x/xtcp/55555", 0, 55555, nil,
 		},
 	}
 

@@ -2,7 +2,7 @@
 
 > [multiaddr](https://github.com/multiformats/multiaddr) support for VSOCK
 
-Adds support to `multiaddr` addresses such as `/vsock/3/tcp/55555` to allow `virtio-vsock` as communication channel.
+Adds support to `multiaddr` addresses such as `/vsock/3/xtcp/55555` to allow `virtio-vsock` as communication channel.
 
 ## Install
 
@@ -23,13 +23,13 @@ import (
 )
 
 // construct from a string (err signals parse failure)
-m1, err := ma.NewMultiaddr("/vsock/3/tcp/1234")
+m1, err := ma.NewMultiaddr("/vsock/3/xtcp/1234")
 
 // construct from bytes (err signals parse failure)
 m2, err := ma.NewMultiaddrBytes(m1.Bytes())
 
 // true
-strings.Equal(m1.String(), "/vsock/3/tcp/1234")
+strings.Equal(m1.String(), "/vsock/3/xtcp/1234")
 strings.Equal(m1.String(), m2.String())
 bytes.Equal(m1.Bytes(), m2.Bytes())
 m1.Equal(m2)

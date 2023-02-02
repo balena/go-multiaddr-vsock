@@ -10,7 +10,7 @@ func TestConstructFails(t *testing.T) {
 	cases := []string{
 		"/vsock",
 		"/vsock/abcd",
-		"/vsock/3/tcp/55555/unix",
+		"/vsock/3/xtcp/55555/unix",
 	}
 
 	for _, a := range cases {
@@ -25,7 +25,7 @@ func TestConstructSucceeds(t *testing.T) {
 		"/vsock/3",
 		"/vsock/3/tcp/55555",
 		"/vsock/3/udp/55555",
-		"/vsock//tcp/55555", // equivalent to VMADDR_CID_ANY
+		"/vsock/x/xtcp/55555", // gets cid from /dev/vsock
 	}
 
 	for _, a := range cases {

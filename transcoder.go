@@ -9,6 +9,7 @@ import (
 )
 
 var TranscoderVsock = ma.NewTranscoderFromFunctions(vsockStB, vsockBtS, nil)
+var TranscoderXport = ma.NewTranscoderFromFunctions(xportStB, xportBtS, nil)
 
 func vsockBtS(b []byte) (string, error) {
 	contextID := binary.BigEndian.Uint32(b)
@@ -36,5 +37,26 @@ func vsockStB(s string) ([]byte, error) {
 		}
 		binary.BigEndian.PutUint32(b, uint32(i))
 	}
+	return b, nil
+}
+
+func xportBtS(b []byte) (string, error) {
+	port := binary.BigEndian.Uint32(b)
+	return fmt.Sprintf("%d", port), nil
+}
+
+func xportStB(s string) ([]byte, error) {
+	if s == "" {
+		return nil, fmt.Errorf("failed to parse vsock port: %s", "cannot be empty")
+	}
+	i, err := strconv.Atoi(s)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse vsock port: %s", err)
+	}
+	if i >= 4294967296 {
+		return nil, fmt.Errorf("failed to parse vsock port: %s", "greater than 4294967296")
+	}
+	b := make([]byte, 4)
+	binary.BigEndian.PutUint32(b, uint32(i))
 	return b, nil
 }
