@@ -43,6 +43,7 @@ m2.Equal(m1)
 m1.Protocols()
 // []Protocol{
 //   Protocol{ Code: 40, Name: 'vsock'},
+//   Protocol{ Code: 7777972, Name: 'xtcp'},
 // }
 ```
 
